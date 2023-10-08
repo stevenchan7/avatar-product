@@ -2,11 +2,11 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"example.com/config"
 	"example.com/controllers"
 	"example.com/models"
-  "example.com/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,7 +17,8 @@ func main() {
 	DB := config.ConnectDB()
 
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "Hello sayang"})
+		secret := os.Getenv("TOKEN_SECRET")
+		c.JSON(http.StatusOK, gin.H{"message": "Hello sayang", "Secret": secret})
 	})
 
 	r.GET("/products", func(c *gin.Context) {
@@ -38,40 +39,9 @@ func main() {
 
 	auth := r.Group("/auth")
 	{
-		auth.POST("/register", func(c *gin.Context) {
-			var userBinder models.RegisterUserInput
+		auth.POST("/register", controllers.Register)
 
-			if err := c.ShouldBindJSON(&userBinder); err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{"success": false, "err": err.Error()})
-				return
-			}
-
-			newUser := models.User{Username: userBinder.Username, Password: userBinder.Password}
-
-			if err := DB.Create(&newUser).Error; err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{"success": false, "err": err.Error()})
-				return
-			}
-
-			c.JSON(http.StatusOK, gin.H{"success": true, "data": newUser})
-		})
-
-		auth.POST("/login", func(c *gin.Context) {
-			var userBinder models.LoginUserInput
-
-			if err := c.ShouldBind(&userBinder); err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{"success": false, "err": err})
-			}
-
-			token, err := utils.LoginCheck(userBinder.Username, userBinder.Password)
-
-			if err != nil {
-				c.JSON(http.StatusUnauthorized, gin.H{"success": false, "err": err})
-				return
-			}
-
-			c.JSON(http.StatusOK, gin.H{"success": true, "token": token})
-		})
+		auth.POST("/login", controllers.Login)
 	}
 
 	r.Run()
