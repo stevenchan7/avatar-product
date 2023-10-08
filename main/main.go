@@ -6,6 +6,7 @@ import (
 	"example.com/config"
 	"example.com/controllers"
 	"example.com/models"
+  "example.com/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -62,7 +63,7 @@ func main() {
 				c.JSON(http.StatusBadRequest, gin.H{"success": false, "err": err})
 			}
 
-			token, err := models.LoginCheck(userBinder.Username, userBinder.Password)
+			token, err := utils.LoginCheck(userBinder.Username, userBinder.Password)
 
 			if err != nil {
 				c.JSON(http.StatusUnauthorized, gin.H{"success": false, "err": err})
