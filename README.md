@@ -12,13 +12,13 @@
   
   Endpoint for register new admin account. Required request body
   
-  > username: string
-  > password: string
+  > username, password
+
 - /auth/login
   
   Endpoint for log into existing admin account. Required request body:
-  1. username: string
-  2. password: string
+  > username, password
+
 - /auth/logout
   Endpoint for log out, removing existing cookie.
 
@@ -26,16 +26,12 @@
 - /admin/add-product
   
   Endpoint for adding new product into database. Required request body:
-  1. title: string
-  2. desc: string
-  3. image: string (link to image drive)
-  4. playstore: string (play store link)
-  5. appstore: string (app store link)
+  
+  > title, desc, image (link to image drive), playstore (play store link), appstore (app store link)
+
 - /admin/edit-product
+
   Endpoint for update existing product in database. Required request body:
-  1. title: string
-  2. desc: string
-  3. image: string (link to image drive)
-  4. playstore: string (play store link)
-  5. appstore: string (app store link)
-  6. prodID: string (corresponding product's ID)
+
+  > title, desc, image (link to image drive), playstore (play store link), appstore (app store link), prodID
+ 
