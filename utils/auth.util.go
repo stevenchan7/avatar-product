@@ -22,11 +22,11 @@ func LoginCheck(username, password string) (string, error) {
 		return "", err
 	}
 
-	token, err := generateToken(u.ID)
+	tokenString, err := generateToken(u.ID)
 
 	if err != nil {
 		return "", err
 	}
 
-	return token, nil
+	return tokenString, nil
 }

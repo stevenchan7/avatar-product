@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"example.com/config"
@@ -34,6 +33,7 @@ func Login(c *gin.Context) {
 
 	if err := c.ShouldBind(&userBinder); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "err": err})
+    return
 	}
 
 	token, err := utils.LoginCheck(userBinder.Username, userBinder.Password)
@@ -44,10 +44,20 @@ func Login(c *gin.Context) {
 	}
 
 	// Set token within cookie
-	bearerToken := fmt.Sprintf("bearer %s", token)
+	bearerToken := "Bearer " + token
 
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", bearerToken, 3600, "/", "localhost", false, true)
 
 	c.JSON(http.StatusOK, gin.H{"success": true, "token": token})
+}
+
+func Logout(c *gin.Context) {
+	_, err := c.Cookie("Authorization")
+
+	if err == nil {
+		c.SetSameSite(http.SameSiteLaxMode)
+		c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
+		c.JSON(http.StatusOK, gin.H{"success": true, "msg": "Successfully removed token"})
+	}
 }
