@@ -24,6 +24,8 @@ func main() {
 	{
 		admin.POST("/add-product", controllers.PostProduct)
 
+		admin.POST("/edit-product", controllers.EditProduct)
+
 		admin.GET("/protected", func(c *gin.Context) {
 			userID, _ := c.Get("userID")
 			c.JSON(http.StatusOK, gin.H{"success": true, "msg": "Hi from protected", "user_id": userID})
