@@ -2,16 +2,19 @@
 
 ## Public routes
 - /products
+  
   Endpoint for getting all products. Return a JSON containing:
   {"success": true, "data": []Product}
   
 
 ## Public auth routes
 - /auth/register
+  
   Endpoint for register new admin account. Required request body:
   1. username: string
   2. password: string
 - /auth/login
+  
   Endpoint for log into existing admin account. Required request body:
   1. username: string
   2. password: string
@@ -20,6 +23,7 @@
 
 ## Admin routes (must login)
 - /admin/add-product
+  
   Endpoint for adding new product into database. Required request body:
   1. title: string
   2. desc: string
