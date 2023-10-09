@@ -10,9 +10,10 @@
 ## Public auth routes
 - /auth/register
   
-  Endpoint for register new admin account. Required request body:
-  1. username: string
-  2. password: string
+  Endpoint for register new admin account. Required request body
+  
+  > username: string
+  > password: string
 - /auth/login
   
   Endpoint for log into existing admin account. Required request body:
