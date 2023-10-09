@@ -18,6 +18,8 @@ func main() {
 	})
 
 	r.GET("/products", controllers.GetProducts)
+  
+  r.GET("/products/:prodID", controllers.GetProductByID)
 
 	admin := r.Group("/admin")
 	admin.Use(middlewares.VerifyToken)
@@ -25,6 +27,8 @@ func main() {
 		admin.POST("/add-product", controllers.PostProduct)
 
 		admin.POST("/edit-product", controllers.EditProduct)
+
+    admin.POST("/delete-product", controllers.DeleteProduct)
 
 		admin.GET("/protected", func(c *gin.Context) {
 			userID, _ := c.Get("userID")

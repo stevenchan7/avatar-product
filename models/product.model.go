@@ -35,3 +35,7 @@ type EditProductInput struct {
 	ID        string `json:"prodID" form:"prodID"`
 	UpdatedAt time.Time
 }
+
+type DeleteProductInput struct {
+	ID string `json:"prodID" form:"prodID"`
+}

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 
 	"example.com/config"
@@ -51,4 +52,20 @@ func EditProduct(c *gin.Context) {
 	DB.Model(&updatedProduct).Updates(productInput)
 
 	c.JSON(http.StatusOK, gin.H{"success": true, "data": updatedProduct})
+}
+
+func DeleteProduct(c *gin.Context) {
+	DB := config.ConnectDB()
+
+	var productInput models.DeleteProductInput
+
+	if err := c.ShouldBind(&productInput); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "err": err.Error()})
+	}
+
+	// Delete from database
+	prodID := productInput.ID
+	DB.Delete(models.Product{}, prodID)
+
+	c.JSON(http.StatusOK, gin.H{"success": true, "msg": fmt.Sprintf("Successfully delete prduct with ID %s", productInput.ID)})
 }
