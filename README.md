@@ -15,6 +15,10 @@ DB_NAME = your mysql database name
   Endpoint for getting all products. Return a JSON containing:
   
   > {"success": true, "data": []Product}
+
+- /products/:productID
+
+  Endpoint for fetching product by ID. Return product.
   
 
 ## Public auth routes
@@ -44,4 +48,10 @@ DB_NAME = your mysql database name
   Endpoint for update existing product in database. Required request body:
 
   > title, desc, image (link to image drive), playstore (play store link), appstore (app store link), prodID
+
+- /admin/delete-product
+
+  Endpoint for delete existing product from database. Required request body:
+
+  > prodID
  
