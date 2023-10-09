@@ -1,10 +1,20 @@
 # avatar-product
 
+## Prerequisite to run this program locally
+
+on /main subdirectory, create an .env file containing:
+```bash
+DB_USER = your mysql database username
+DB_PASS = your mysql database username
+DB_NAME = your mysql database name
+```
+
 ## Public routes
 - /products
   
   Endpoint for getting all products. Return a JSON containing:
-  {"success": true, "data": []Product}
+  
+  > {"success": true, "data": []Product}
   
 
 ## Public auth routes
