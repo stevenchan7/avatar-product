@@ -7,6 +7,8 @@ on /main subdirectory, create an .env file containing:
 DB_USER = your mysql database username
 DB_PASS = your mysql database username
 DB_NAME = your mysql database name
+SECRET_JWT = some random string
+TOKEN_LIFESPAN = 1
 ```
 
 ## Public routes
