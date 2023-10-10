@@ -65,7 +65,7 @@ func DeleteProduct(c *gin.Context) {
 
 	// Delete from database
 	prodID := productInput.ID
-	DB.Delete(models.Product{}, prodID)
+	DB.Delete(&models.Product{}, prodID)
 
 	c.JSON(http.StatusOK, gin.H{"success": true, "msg": fmt.Sprintf("Successfully delete prduct with ID %s", productInput.ID)})
 }

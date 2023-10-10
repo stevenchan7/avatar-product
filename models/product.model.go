@@ -37,5 +37,5 @@ type EditProductInput struct {
 }
 
 type DeleteProductInput struct {
-	ID string `json:"prodID" form:"prodID"`
+	ID string `json:"prodID" form:"prodID" binding:"required"`
 }
